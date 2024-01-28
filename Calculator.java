@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import java.util.Scanner;
 
 /**
+ This is a javaFX calculator with an interface.
  @author Sam Kyataka
 */
 public class Calculator extends Application {
