@@ -1,3 +1,7 @@
+#This is math app with two modes; 
+#Game mode is to challenge the user with different random math operations.
+#Pratice mode is to help the user to pratice a certain math operation.
+
 import random
 
 user_name = input("Enter your name: ")
