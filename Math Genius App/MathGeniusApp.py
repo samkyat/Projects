@@ -19,22 +19,23 @@ def start():
 def run_app():
     print("Enter: \n'game' for Game mode\n'practice' for practice mode")
 
-    mode_choice = raw_input("Enter your choice: ")
+    mode_choice = input("Enter your choice: ")
     
     if mode_choice.lower() == "game":
         print("\nYou've chosen Game mode.")
         print("To quit, just type 'end'.\n")
         
-        game_mode = new GameMode(2)
+        game_mode = GameMode(2)
         
         while mode_choice.lower() == "game":
             response = game_mode.game_question()
             if response == "end":
                 mode_choice = "end"
+                print(game_mode.summarize_score())
         
         
     elif mode_choice.lower() == "practice":
-        practice_mode = new PracticeMode(2, " ")
+        practice_mode = PracticeMode(2, " ")
         
         operations = {"Add": "+", "Sub": "-", "Mult": "x", "Div": "÷"}
         
@@ -46,17 +47,18 @@ def run_app():
         
         while mode_choice == "practice":
             
-            if !validate_practice_op:
+            if not validate_practice_op(practice_mode, op_choice, operations):
                 op_choice = input("\nSelect your operation: ")
             else: 
                 response = practice_mode.practice_question()
                 if response == "end":
                     mode_choice = "end"
+                    print(practice_mode.summarize_score())
     else:
         print("INVALID CHOICE.")
         
     user_input = input("Do you want to play again [Y/N]: ")
-    while user_input != "Y" or user_input = "N":
+    while user_input != "Y" and user_input != "N":
         print("Invalid choice\n")
         user_input = input("Do you want to play again [Y/N]: ")
     
@@ -65,7 +67,7 @@ def run_app():
     else:
         return
     
-def validate_practice_op(obj, user_input, operations):
+def validate_practice_op(obj, op_choice, operations):
     if op_choice == "Add":
         obj.change_operation(operations["Add"])
     elif op_choice == "Sub":

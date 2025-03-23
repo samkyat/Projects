@@ -19,35 +19,34 @@ class MathMode:
            return "Invalid operation"
     
     def question_generator(self, op):
-        num1 = random_number_picker
-        num2 = random_number_picker
+        num1 = self.random_number_picker()
+        num2 = self.random_number_picker()
         
-        ans = input(f"{num1} {op} {num2} = ")
+        ans = input(f"\n{num1} {op} {num2} = ")
         try:
             if ans == "end":
                 return ans
             
             ans = int(ans)
-            correct_ans = question_solver(op, num1, num2)
+            correct_ans = self.question_solver(op, num1, num2)
             if ans == correct_ans:
                 self.score_counter += 1
                 print("You're correct!!")
             else:
                 print("You're incorrect")
-                print(f"The Correct Answer is {correct_ans}"
+                print(f"The Correct Answer is {correct_ans}")
             self.question_counter += 1
-        
-       except ValueError as e:
+        except ValueError as e:
             print("Invalid input type -- only numbers allowed")
         except Exception as e:
-            print("Invalid input")
+            print("Invalid input" + e)
         return None
     
     def summarize_score(self):
-       return f"You got {self.score_counter}/{self.question_counter}"
+       return f"\nYou got {self.score_counter}/{self.question_counter} questions correct!!!\n"
     
     def random_number_picker(self):
-        return random.randrange(0,(10**num_of_digits))
+        return random.randrange(0,(10**self.num_of_digits))
         
 
 class GameMode(MathMode):
@@ -57,7 +56,7 @@ class GameMode(MathMode):
     def game_question(self):
         operations = ["+", "-", "x", "÷"]
         op_choice = random.choice(operations)
-        return question_generator(op_choice)
+        return super().question_generator(op_choice)
         
 
 class PracticeMode(MathMode):
@@ -69,4 +68,4 @@ class PracticeMode(MathMode):
         self.op = op
     
     def practice_question(self):
-        return question_generator(self.op)
+        return super().question_generator(self.op)
