@@ -19,8 +19,13 @@ public class App extends Application {
       ViewModel model = new ViewModel(new Calculator());
       ViewBuilder builder = new ViewBuilder(model);
       
+      Scene scene = new Scene(builder.build(), 300, 450);
+      String css = this.getClass().getResource("/ui/calculator.css").toExternalForm();
+      scene.getStylesheets().add(css);
+      
       primaryStage.setTitle("Calculator");
-      primaryStage.setScene(new Scene(builder.build(), 250, 300));
+      primaryStage.setScene(scene);
+      primaryStage.setResizable(false);
       primaryStage.show();
    }
 }

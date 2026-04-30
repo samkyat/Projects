@@ -21,23 +21,34 @@ public class ViewBuilder implements Builder<Region>{
 
     public Region build(){
         VBox vbox = new VBox(displayLabel(), row1(), row2(), row3(), row4(), row5());
-        vbox.setSpacing(5);
+        vbox.setSpacing(10);
+        vbox.getStyleClass().add("calculator-root");
+        vbox.setPrefWidth(300);
+        vbox.setPrefHeight(500);
         return vbox;
     }
 
     public Node displayLabel(){
-        Label display = new Label();
+        Label display = new Label("0");
         display.textProperty().bind(viewModel.getNumProperty());
+        display.getStyleClass().add("calculator-display");
         return display;
     }
 
     public Node row1(){
         HBox row = new HBox();
-        row.setSpacing(5);
+        row.setSpacing(10);
+        row.getStyleClass().add("calculator-row");
         int len = symbols[0].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[0][i]);
-            btn.setPrefWidth(50);
+            btn.setPrefWidth(60);
+            btn.getStyleClass().add("calculator-button");
+            if (symbols[0][i].equals("÷")) {
+                btn.getStyleClass().add("operator-button");
+            } else {
+                btn.getStyleClass().add("function-button");
+            }
             btn.setOnAction(evt -> processReq(btn.getText()));
             row.getChildren().add(btn);
         }
@@ -45,11 +56,16 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row2(){
         HBox row = new HBox();
-        row.setSpacing(5);
+        row.setSpacing(10);
+        row.getStyleClass().add("calculator-row");
         int len = symbols[1].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[1][i]);
-            btn.setPrefWidth(50);
+            btn.setPrefWidth(60);
+            btn.getStyleClass().add("calculator-button");
+            if (symbols[1][i].equals("x")) {
+                btn.getStyleClass().add("operator-button");
+            }
             btn.setOnAction(evt -> processReq(btn.getText()));
             row.getChildren().add(btn);
         }
@@ -57,11 +73,16 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row3(){
         HBox row = new HBox();
-        row.setSpacing(5);
+        row.setSpacing(10);
+        row.getStyleClass().add("calculator-row");
         int len = symbols[2].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[2][i]);
-            btn.setPrefWidth(50);
+            btn.setPrefWidth(60);
+            btn.getStyleClass().add("calculator-button");
+            if (symbols[2][i].equals("-")) {
+                btn.getStyleClass().add("operator-button");
+            }
             btn.setOnAction(evt -> processReq(btn.getText()));
             row.getChildren().add(btn);
         }
@@ -69,11 +90,16 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row4(){
         HBox row = new HBox();
-        row.setSpacing(5);
+        row.setSpacing(10);
+        row.getStyleClass().add("calculator-row");
         int len = symbols[3].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[3][i]);
-            btn.setPrefWidth(50);
+            btn.setPrefWidth(60);
+            btn.getStyleClass().add("calculator-button");
+            if (symbols[3][i].equals("+")) {
+                btn.getStyleClass().add("operator-button");
+            }
             btn.setOnAction(evt -> processReq(btn.getText()));
             row.getChildren().add(btn);
         }
@@ -81,11 +107,18 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row5(){
         HBox row = new HBox();
-        row.setSpacing(5);
+        row.setSpacing(10);
+        row.getStyleClass().add("calculator-row");
         int len = symbols[4].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[4][i]);
-            btn.setPrefWidth(50);
+            btn.setPrefWidth(60);
+            btn.getStyleClass().add("calculator-button");
+            if (symbols[4][i].equals("=")) {
+                btn.getStyleClass().add("equals-button");
+            } else if (symbols[4][i].equals("+/-")) {
+                btn.getStyleClass().add("special-button");
+            }
             btn.setOnAction(evt -> processReq(btn.getText()));
             row.getChildren().add(btn);
         }

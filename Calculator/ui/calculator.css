@@ -1,0 +1,126 @@
+/* Calculator CSS Stylesheet */
+
+/* Main container */
+.calculator-root {
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-background-color: #f0f0f0;
+    -fx-border-width: 2;
+}
+
+/* Display screen */
+.calculator-display {
+    -fx-font-size: 26;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #1a1a1a;
+    -fx-background-radius: 8;
+    -fx-padding: 15;
+    -fx-alignment: center-right;
+    -fx-border-color: #333;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-min-height: 70;
+    -fx-max-width: Infinity;
+    -fx-wrap-text: false;
+}
+
+/* Button rows */
+.calculator-row {
+    -fx-spacing: 10;
+    -fx-fill-width: true;
+}
+
+/* Standard buttons */
+.calculator-button {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-padding: 15;
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #999;
+    -fx-border-width: 1;
+    -fx-min-width: 60;
+    -fx-min-height: 60;
+    -fx-cursor: hand;
+}
+
+.calculator-button:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.calculator-button:pressed {
+    -fx-background-color: #b0b0b0;
+}
+
+/* Operator buttons (+-x÷) */
+.operator-button {
+    -fx-font-size: 18;
+    -fx-background-color: #ff9500;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #cc7700;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.operator-button:hover {
+    -fx-background-color: #ffb300;
+}
+
+.operator-button:pressed {
+    -fx-background-color: #ff8800;
+}
+
+/* Function buttons (AC, DEL, %) */
+.function-button {
+    -fx-font-size: 15;
+    -fx-background-color: #a6a6a6;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #666;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.function-button:hover {
+    -fx-background-color: #b8b8b8;
+}
+
+.function-button:pressed {
+    -fx-background-color: #949494;
+}
+
+/* Equals button */
+.equals-button {
+    -fx-background-color: #4caf50;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #388e3c;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.equals-button:hover {
+    -fx-background-color: #66bb6a;
+}
+
+.equals-button:pressed {
+    -fx-background-color: #388e3c;
+}
+
+/* Sign and decimal buttons */
+.special-button {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #333;
+    -fx-border-color: #999;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+
+.special-button:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.special-button:pressed {
+    -fx-background-color: #b0b0b0;
+}
