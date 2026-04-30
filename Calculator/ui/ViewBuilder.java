@@ -8,6 +8,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
+/**
+ * Builder for the Calculator UI.
+ * Constructs the layout with display and button grid.
+ */
 public class ViewBuilder implements Builder<Region>{
     private String[][] symbols = {{"AC", "DEL", "%", "÷"},
                                   {"7", "8", "9", "x"},
@@ -15,10 +19,20 @@ public class ViewBuilder implements Builder<Region>{
                                   {"1", "2", "3", "+"},
                                   {"+/-", "0", ".", "="}};
     private ViewModel viewModel;
-    public ViewBuilder(ViewModel viewMdl){
-        viewModel = viewMdl;
+
+    /**
+     * Creates a new ViewBuilder with the given ViewModel.
+     * @param viewModel the ViewModel for handling user interactions
+     */
+    public ViewBuilder(ViewModel viewModel){
+        this.viewModel = viewModel;
     }
 
+    /**
+     * Builds the calculator layout.
+     * @return the root region containing display and buttons
+     */
+    @Override
     public Region build(){
         VBox vbox = new VBox(displayLabel(), row1(), row2(), row3(), row4(), row5());
         vbox.setSpacing(10);
@@ -28,13 +42,19 @@ public class ViewBuilder implements Builder<Region>{
         return vbox;
     }
 
-    public Node displayLabel(){
+    /**
+     * Creates the display label bound to the current number.
+     */
+    private Node displayLabel(){
         Label display = new Label("0");
         display.textProperty().bind(viewModel.getNumProperty());
         display.getStyleClass().add("calculator-display");
         return display;
     }
 
+    /**
+     * Creates a row of buttons for the given row index.
+     */
     private HBox createRow(int rowIndex) {
         HBox row = new HBox();
         row.setSpacing(10);
@@ -51,6 +71,9 @@ public class ViewBuilder implements Builder<Region>{
         return row;
     }
 
+    /**
+     * Applies appropriate style class to button based on its symbol.
+     */
     private void applyButtonStyle(Button btn, String symbol) {
         if ("+-x÷".contains(symbol)) {
             btn.getStyleClass().add("operator-button");
@@ -83,7 +106,10 @@ public class ViewBuilder implements Builder<Region>{
         return createRow(4);
     }
 
-    public void processReq(String symbl){
+    /**
+     * Processes user input from button presses.
+     */
+    private void processReq(String symbl){
         if ("0123456789".contains(symbl)){
             viewModel.updateCurrNum(symbl);
         }

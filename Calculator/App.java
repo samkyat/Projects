@@ -6,16 +6,15 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 
 /**
- This is a javaFX calculator with an interface.
- @author Sam Kyataka
-*/
+ * Main application entry point for the JavaFX Calculator.
+ * @author Sam Kyataka
+ */
 public class App extends Application {
    public static void main(String[] args){
       launch(args);
    }
 
    public void start(Stage primaryStage){
-      
       ViewModel model = new ViewModel(new Calculator());
       ViewBuilder builder = new ViewBuilder(model);
       

@@ -1,8 +1,13 @@
 package ui;
+
 import domain.Calculator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * ViewModel for the Calculator UI.
+ * Manages display state and handles user input processing.
+ */
 public class ViewModel{
     private final Calculator calculator;
     private final StringProperty currNum;
@@ -29,10 +34,6 @@ public class ViewModel{
     public String getA(){
         return calculator.getNumA();
     }
-    public String getB(){
-        return calculator.getNumB();
-    }
-
     public String getOp(){
         return calculator.getOp();
     }
@@ -49,7 +50,7 @@ public class ViewModel{
     }
 
     public void delete(){
-        if (currNum.getValue().equals("Error")) {
+        if (isError()) {
             currNum.setValue("0");
             return;
         }
@@ -62,8 +63,12 @@ public class ViewModel{
         }
     }
 
+    /**
+     * Updates the current number being displayed.
+     * @param val digit or decimal point to add
+     */
     public void updateCurrNum(String val){
-        if (currNum.getValue().equals("Error")) {
+        if (isError()) {
             currNum.setValue(val);
             return;
         }
@@ -83,12 +88,11 @@ public class ViewModel{
         }
     }
 
+    /**
+     * Toggles the sign of the current number.
+     */
     public void signChange(){
-        if (currNum.getValue().equals("Error")) {
-            currNum.setValue("0");
-            return;
-        }
-        if (currNum.getValue().equals("0")) {
+        if (isError() || isZero()) {
             return;
         }
         double curr = Double.parseDouble(currNum.getValue());
@@ -97,12 +101,11 @@ public class ViewModel{
         currNum.setValue(curString);
     }
 
+    /**
+     * Converts the current number to its percentage equivalent.
+     */
     public void percentage(){
-        if (currNum.getValue().equals("Error")) {
-            currNum.setValue("0");
-            return;
-        }
-        if (currNum.getValue().equals("0")) {
+        if (isError() || isZero()) {
             return;
         }
         double curr = Double.parseDouble(currNum.getValue());
@@ -111,10 +114,13 @@ public class ViewModel{
         currNum.setValue(curString);
     }
     
+    /**
+     * Performs the pending calculation and displays result.
+     */
     public void calculate(){
         String val = calculator.evaluate();
         currNum.setValue(val);
-        if (val.equals("Error")) {
+        if (isError()) {
             calculator.setNumA(null);
             calculator.setNumB(null);
             calculator.setOp(null);
@@ -122,8 +128,12 @@ public class ViewModel{
         }
     }
 
+    /**
+     * Handles operator button presses with chaining support.
+     * @param op the operator symbol (+, -, x, ÷)
+     */
     public void handleOperator(String op) {
-        if (currNum.getValue().equals("Error")) {
+        if (isError()) {
             allClear();
             currNum.setValue("0");
             return;
@@ -137,7 +147,7 @@ public class ViewModel{
         } else if (!currNum.getValue().equals("0")) {
             updateB();
             calculate();
-            if (!currNum.getValue().equals("Error")) {
+            if (!isError()) {
                 updateA();
                 updateB("0");
                 updateOp(op);
@@ -146,5 +156,19 @@ public class ViewModel{
         } else {
             updateOp(op);
         }
+    }
+
+    /**
+     * Helper method to check if current display shows error.
+     */
+    private boolean isError() {
+        return currNum.getValue().equals("Error");
+    }
+
+    /**
+     * Helper method to check if current number is zero.
+     */
+    private boolean isZero() {
+        return currNum.getValue().equals("0");
     }
 }
