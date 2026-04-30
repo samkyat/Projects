@@ -44,7 +44,6 @@ public class ViewModel{
         calculator.setNumA(null);
         calculator.setNumB(null);
         calculator.setOp(null);
-        currNum.setValue("0");
     }
 
     public void delete(){

@@ -4,12 +4,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.scene.text.Font;
 import javafx.scene.layout.GridPane;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 import javafx.event.ActionEvent;
-import java.util.Scanner;
 
 /**
  This is a javaFX calculator with an interface.

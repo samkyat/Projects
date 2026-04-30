@@ -50,7 +50,7 @@ public class Calculator{
                 result = A/B;
                 break;
             case "%":
-                result = A/100;
+                result = A/100.0;
                 break;
             default:
                 break;

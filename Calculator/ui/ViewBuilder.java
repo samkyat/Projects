@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
@@ -103,22 +102,20 @@ public class ViewBuilder implements Builder<Region>{
             viewModel.updateCurrNum(symbl);
         }
         else if ("+-x÷".contains(symbl)){
-            if (viewModel.getA()==null){
+            if (viewModel.getOp()==null){
                 viewModel.updateA();
                 viewModel.getNumProperty().setValue("0");
-            }
-            else {
-                viewModel.updateB();
-                viewModel.calculate();
-                viewModel.updateA();
+                viewModel.updateB("0");
             }
             viewModel.updateOp(symbl);
             
         }
         else if (symbl.equals("=")){
-            viewModel.updateB();
-            if (viewModel.getA()==null || viewModel.getOp()==null) return;
-            viewModel.calculate();
+            if (viewModel.getA()!=null){
+                viewModel.updateB();
+                viewModel.calculate();
+                viewModel.allClear();
+            }
         }
         else if (symbl.equals("%")){
             viewModel.updateA();
@@ -131,6 +128,12 @@ public class ViewBuilder implements Builder<Region>{
         }
         else if (symbl.equals("AC")){
             viewModel.allClear();
+            viewModel.getNumProperty().setValue("0");
+        }
+        else if (symbl.equals(".")){
+            if (!viewModel.getNumProperty().getValue().contains(".")){
+                viewModel.updateCurrNum(symbl);
+            }
         }
         else if (symbl.equals("DEL")){
             viewModel.delete();
