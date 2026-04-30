@@ -47,6 +47,9 @@ public class Calculator{
                 result = A*B;
                 break;
             case "÷":
+                if (B == 0) {     
+                    return "Error";
+                }
                 result = A/B;
                 break;
             default:
@@ -56,9 +59,18 @@ public class Calculator{
     }
 
     public String removeZeroDecimal(double num){
+        String str = "";
         if (num%1 == 0){
-            return Integer.toString((int) num);
+            str = Long.toString((long) num);
+            if (str.length()>14){
+                str = String.format("%E", num);
+            }
+            return str;
         }
-        return Double.toString(num);
+        str = String.format("%.14g", num);
+        if (str.length() > 14){
+            str = String.format("%E", num);
+        }
+        return str;
     }
 }

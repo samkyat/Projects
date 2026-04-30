@@ -35,94 +35,52 @@ public class ViewBuilder implements Builder<Region>{
         return display;
     }
 
-    public Node row1(){
+    private HBox createRow(int rowIndex) {
         HBox row = new HBox();
         row.setSpacing(10);
         row.getStyleClass().add("calculator-row");
-        int len = symbols[0].length;
+        int len = symbols[rowIndex].length;
         for (int i = 0; i < len; i++){
-            Button btn = new Button(symbols[0][i]);
+            Button btn = new Button(symbols[rowIndex][i]);
             btn.setPrefWidth(60);
             btn.getStyleClass().add("calculator-button");
-            if (symbols[0][i].equals("÷")) {
-                btn.getStyleClass().add("operator-button");
-            } else {
-                btn.getStyleClass().add("function-button");
-            }
+            applyButtonStyle(btn, symbols[rowIndex][i]);
             btn.setOnAction(evt -> processReq(btn.getText()));
             row.getChildren().add(btn);
         }
         return row;
     }
-    public Node row2(){
-        HBox row = new HBox();
-        row.setSpacing(10);
-        row.getStyleClass().add("calculator-row");
-        int len = symbols[1].length;
-        for (int i = 0; i < len; i++){
-            Button btn = new Button(symbols[1][i]);
-            btn.setPrefWidth(60);
-            btn.getStyleClass().add("calculator-button");
-            if (symbols[1][i].equals("x")) {
-                btn.getStyleClass().add("operator-button");
-            }
-            btn.setOnAction(evt -> processReq(btn.getText()));
-            row.getChildren().add(btn);
+
+    private void applyButtonStyle(Button btn, String symbol) {
+        if ("+-x÷".contains(symbol)) {
+            btn.getStyleClass().add("operator-button");
+        } else if (symbol.equals("=")) {
+            btn.getStyleClass().add("equals-button");
+        } else if (symbol.equals("+/-")) {
+            btn.getStyleClass().add("special-button");
+        } else if ("ACDEL%".contains(symbol)) {
+            btn.getStyleClass().add("function-button");
         }
-        return row;
     }
-    public Node row3(){
-        HBox row = new HBox();
-        row.setSpacing(10);
-        row.getStyleClass().add("calculator-row");
-        int len = symbols[2].length;
-        for (int i = 0; i < len; i++){
-            Button btn = new Button(symbols[2][i]);
-            btn.setPrefWidth(60);
-            btn.getStyleClass().add("calculator-button");
-            if (symbols[2][i].equals("-")) {
-                btn.getStyleClass().add("operator-button");
-            }
-            btn.setOnAction(evt -> processReq(btn.getText()));
-            row.getChildren().add(btn);
-        }
-        return row;
+
+    public Node row1() {
+        return createRow(0);
     }
-    public Node row4(){
-        HBox row = new HBox();
-        row.setSpacing(10);
-        row.getStyleClass().add("calculator-row");
-        int len = symbols[3].length;
-        for (int i = 0; i < len; i++){
-            Button btn = new Button(symbols[3][i]);
-            btn.setPrefWidth(60);
-            btn.getStyleClass().add("calculator-button");
-            if (symbols[3][i].equals("+")) {
-                btn.getStyleClass().add("operator-button");
-            }
-            btn.setOnAction(evt -> processReq(btn.getText()));
-            row.getChildren().add(btn);
-        }
-        return row;
+
+    public Node row2() {
+        return createRow(1);
     }
-    public Node row5(){
-        HBox row = new HBox();
-        row.setSpacing(10);
-        row.getStyleClass().add("calculator-row");
-        int len = symbols[4].length;
-        for (int i = 0; i < len; i++){
-            Button btn = new Button(symbols[4][i]);
-            btn.setPrefWidth(60);
-            btn.getStyleClass().add("calculator-button");
-            if (symbols[4][i].equals("=")) {
-                btn.getStyleClass().add("equals-button");
-            } else if (symbols[4][i].equals("+/-")) {
-                btn.getStyleClass().add("special-button");
-            }
-            btn.setOnAction(evt -> processReq(btn.getText()));
-            row.getChildren().add(btn);
-        }
-        return row;
+
+    public Node row3() {
+        return createRow(2);
+    }
+
+    public Node row4() {
+        return createRow(3);
+    }
+
+    public Node row5() {
+        return createRow(4);
     }
 
     public void processReq(String symbl){
@@ -130,12 +88,7 @@ public class ViewBuilder implements Builder<Region>{
             viewModel.updateCurrNum(symbl);
         }
         else if ("+-x÷".contains(symbl)){
-            if (viewModel.getOp()==null){
-                viewModel.updateA();
-                viewModel.getNumProperty().setValue("0");
-                viewModel.updateB("0");
-            }
-            viewModel.updateOp(symbl);
+            viewModel.handleOperator(symbl);
             
         }
         else if (symbl.equals("=")){

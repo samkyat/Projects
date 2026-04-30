@@ -20,8 +20,12 @@ public class App extends Application {
       ViewBuilder builder = new ViewBuilder(model);
       
       Scene scene = new Scene(builder.build(), 300, 450);
-      String css = this.getClass().getResource("/ui/calculator.css").toExternalForm();
-      scene.getStylesheets().add(css);
+      try {
+         String css = this.getClass().getResource("/ui/calculator.css").toExternalForm();
+         scene.getStylesheets().add(css);
+      } catch (NullPointerException e) {
+         System.err.println("CSS file not found: /ui/calculator.css");
+      }
       
       primaryStage.setTitle("Calculator");
       primaryStage.setScene(scene);
