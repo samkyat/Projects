@@ -1,16 +1,9 @@
+import domain.Calculator;
 import ui.ViewModel;
+import ui.ViewBuilder;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.scene.text.Font;
-import javafx.scene.layout.GridPane;
-import javafx.geometry.Pos;
-import javafx.geometry.HPos;
-import javafx.event.ActionEvent;
-import java.util.Scanner;
 
 /**
  This is a javaFX calculator with an interface.
@@ -22,12 +15,12 @@ public class App extends Application {
    }
 
    public void start(Stage primaryStage){
+      
+      ViewModel model = new ViewModel(new Calculator());
+      ViewBuilder builder = new ViewBuilder(model);
+      
       primaryStage.setTitle("Calculator");
-      Text greeting = new Text("Welcome To My Calculator");
-      GridPane grid = new GridPane();
-      grid.add(greeting, 0,0,4,1);
-      Scene scene = new Scene(grid, 250,300);
-      primaryStage.setScene(scene);
+      primaryStage.setScene(new Scene(builder.build(), 250, 300));
       primaryStage.show();
    }
 }

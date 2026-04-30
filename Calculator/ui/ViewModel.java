@@ -18,9 +18,24 @@ public class ViewModel{
     public void updateB(){
         calculator.setNumB(currNum.getValue());
     }
+    public void updateB(String val){
+        calculator.setNumB(val);
+    }
     public void updateOp(String op){
         calculator.setOp(op);
     }
+
+    public String getA(){
+        return calculator.getNumA();
+    }
+    public String getB(){
+        return calculator.getNumB();
+    }
+
+    public String getOp(){
+        return calculator.getOp();
+    }
+    
     public StringProperty getNumProperty(){
         return currNum;
     }
@@ -29,6 +44,7 @@ public class ViewModel{
         calculator.setNumA(null);
         calculator.setNumB(null);
         calculator.setOp(null);
+        currNum.setValue("0");
     }
 
     public void delete(){
@@ -58,7 +74,8 @@ public class ViewModel{
         currNum.setValue(curString);
     }
     
-    public String calculate(){
-        return calculator.evaluate();
+    public void calculate(){
+        String val = calculator.evaluate();
+        currNum.setValue(val);
     }
 }

@@ -18,7 +18,7 @@ public class Calculator{
         numB = num;
     }
     public void setOp(String op){
-        operation = op.strip();
+        operation = op;
     }
 
     public String getNumA(){
@@ -26,6 +26,10 @@ public class Calculator{
     }
     public String getNumB(){
         return numB;
+    }
+
+    public String getOp(){
+        return operation;
     }
     
     public String evaluate(){
@@ -47,6 +51,7 @@ public class Calculator{
                 break;
             case "%":
                 result = A/100;
+                break;
             default:
                 break;
         }
