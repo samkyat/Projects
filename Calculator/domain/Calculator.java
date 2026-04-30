@@ -49,9 +49,6 @@ public class Calculator{
             case "÷":
                 result = A/B;
                 break;
-            case "%":
-                result = A/100.0;
-                break;
             default:
                 break;
         }

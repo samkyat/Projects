@@ -1,6 +1,5 @@
 package ui;
 
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Button;
@@ -23,7 +22,6 @@ public class ViewBuilder implements Builder<Region>{
     public Region build(){
         VBox vbox = new VBox(displayLabel(), row1(), row2(), row3(), row4(), row5());
         vbox.setSpacing(5);
-        vbox.setPadding(new Insets(10));
         return vbox;
     }
 
@@ -35,8 +33,7 @@ public class ViewBuilder implements Builder<Region>{
 
     public Node row1(){
         HBox row = new HBox();
-
-        row.setPadding(new Insets(10));
+        row.setSpacing(5);
         int len = symbols[0].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[0][i]);
@@ -48,7 +45,7 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row2(){
         HBox row = new HBox();
-        row.setPadding(new Insets(10));
+        row.setSpacing(5);
         int len = symbols[1].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[1][i]);
@@ -60,7 +57,7 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row3(){
         HBox row = new HBox();
-        row.setPadding(new Insets(10));
+        row.setSpacing(5);
         int len = symbols[2].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[2][i]);
@@ -72,8 +69,7 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row4(){
         HBox row = new HBox();
-
-        row.setPadding(new Insets(10));
+        row.setSpacing(5);
         int len = symbols[3].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[3][i]);
@@ -85,8 +81,7 @@ public class ViewBuilder implements Builder<Region>{
     }
     public Node row5(){
         HBox row = new HBox();
-
-        row.setPadding(new Insets(10));
+        row.setSpacing(5);
         int len = symbols[4].length;
         for (int i = 0; i < len; i++){
             Button btn = new Button(symbols[4][i]);
@@ -118,10 +113,7 @@ public class ViewBuilder implements Builder<Region>{
             }
         }
         else if (symbl.equals("%")){
-            viewModel.updateA();
-            viewModel.updateB("0");
-            viewModel.updateOp(symbl);
-            viewModel.calculate();
+            viewModel.percentage();
         }
         else if (symbl.equals("+/-")){
             viewModel.signChange();

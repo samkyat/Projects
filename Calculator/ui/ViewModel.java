@@ -72,6 +72,13 @@ public class ViewModel{
         String curString = calculator.removeZeroDecimal(curr);
         currNum.setValue(curString);
     }
+
+    public void percentage(){
+        double curr = Double.parseDouble(currNum.getValue());
+        curr /= 100.0;
+        String curString = calculator.removeZeroDecimal(curr);
+        currNum.setValue(curString);
+    }
     
     public void calculate(){
         String val = calculator.evaluate();
