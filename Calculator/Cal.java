@@ -15,7 +15,7 @@ import java.util.Scanner;
  This is a javaFX calculator with an interface.
  @author Sam Kyataka
 */
-public class App extends Application {
+public class Cal extends Application {
    String output = "";
    String operation = "";
    String display = "";

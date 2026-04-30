@@ -4,6 +4,7 @@ public class Calculator{
     private String numA;
     private String operation;
     private String numB;
+
     public Calculator(){
         numA = null;
         operation = null;
@@ -44,6 +45,8 @@ public class Calculator{
             case "÷":
                 result = A/B;
                 break;
+            case "%":
+                result = A/100;
             default:
                 break;
         }
@@ -54,7 +57,6 @@ public class Calculator{
         if (num%1 == 0){
             return Integer.toString((int) num);
         }
-
         return Double.toString(num);
     }
 }
