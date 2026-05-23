@@ -73,7 +73,7 @@ def validate_practice_op(obj, op_choice, operations):
     elif op_choice == "Sub":
         obj.change_operation(operations["Sub"])
     elif op_choice == "Mult":
-        ob.change_operation(operations["Mult"])
+        obj.change_operation(operations["Mult"])
     elif op_choice == "Div":
         obj.change_operation(operations["Div"])
     else:
