@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Mode</title>
+</head>
+<body>
+    <div class="container">
+        <div id="startPage" class="flex-center flex-column">
+            <h2>Practice Setup</h2>
+            <div id="setupPanel">
+                <div id="quesNumSelector">
+                    <label for="quesNum">Number of Questions</label>
+                    <select name="quesNum" id="quesNumList">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <div id="opSelector">
+                    <p>Operations</p>
+                    <label>
+                        <input type="checkbox" id="addition" name="operation" value="addition">
+                        Addition
+                    </label>
+                    <label>
+                        <input type="checkbox" id="subtraction" name="operation" value="subtraction">
+                        Subtraction
+                    </label>
+                    <label>
+                        <input type="checkbox" id="multiplication" name="operation" value="multiplication">
+                        Multiplication
+                    </label>
+                    <label>
+                        <input type="checkbox" id="division" name="operation" value="division">
+                        Division
+                    </label>
+                </div>
+                <div id="diffSelector">
+                    <p>Difficulty</p>
+                    <label>
+                        <input type="radio" name="Difficulty" id="Easy" value="Easy">
+                        Easy
+                    </label>
+                    <label>
+                        <input type="radio" name="Difficulty" id="Medium" value="Medium">
+                        Medium
+                    </label>
+                    <label>
+                        <input type="radio" name="Difficulty" id="Hard" value="Hard">
+                        Hard
+                    </label>
+                </div>
+                <a class="btn" href="./game.html">Start Practice</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
