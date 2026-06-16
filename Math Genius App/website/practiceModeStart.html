@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practice Mode</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/startPage.css" />
 </head>
 <body>
     <div class="container">
         <div id="startPage" class="flex-center flex-column">
-            <h2>Practice Setup</h2>
-            <div id="setupPanel">
+            <div id="header">
+                <a href="./home.html" class="btn">&lt; Back</a>
+                <h2>Practice Setup</h2>
+            </div>
+            <div id="main">
                 <div id="quesNumSelector">
                     <label for="quesNum">Number of Questions</label>
                     <select name="quesNum" id="quesNumList">
@@ -54,7 +59,7 @@
                         Hard
                     </label>
                 </div>
-                <a class="btn" href="./game.html">Start Practice</a>
+                <a class="btn" href="./practice.html">Start Practice</a>
             </div>
         </div>
     </div>
