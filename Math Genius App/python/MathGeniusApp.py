@@ -31,9 +31,7 @@ def run_app():
             response = game_mode.game_question()
             if response == "end":
                 mode_choice = "end"
-                print(game_mode.summarize_score())
-        
-        
+                print(game_mode.summarize_score())    
     elif mode_choice.lower() == "practice":
         practice_mode = PracticeMode(2, " ")
         
