@@ -11,17 +11,19 @@
     <div class="container">
         <div id="game" class="flex-center flex-column">
             <div id="header">
-                <p>Score: 5</p>
-                <p>Streak: 4</p>
-                <button type="submit" class="btn">End Game</button>
+                <p id="score">Score: 0</p>
+                <p id="streak">Streak: 0</p>
+                <button type="button" id="endBtn" class="btn">End Game</button>
             </div>
             <div id="main">
                 <p id="question">45 x 3 = ?</p>
                 <input type="number" name="answer" id="answer">
                 <button type="submit" id="submitBtn">Submit Answer</button>
+                <p id="status"></p>
             </div>
         </div>
     </div>
+    <script type="module" src="./js/GameApp.js"></script>
 </body>
 </html>
 <!--

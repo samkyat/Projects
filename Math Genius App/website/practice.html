@@ -11,15 +11,17 @@
     <div class="container">
         <div id="game" class="flex-center flex-column">
             <div id="header">
-                <p>Score: 5</p>
-                <p>Streak: 4</p>
+                <p id="score">Score: 0</p>
+                <p id="progress">Question: 0 / 0</p>
             </div>
             <div id="main">
                 <p id="question">45 x 3 = ?</p>
                 <input type="number" name="answer" id="answer">
-                <button type="submit" id="submitBtn">Submit Answer</button>
+                <button type="button" id="submitBtn">Submit Answer</button>
+                <p id="status"></p>
             </div>
         </div>
     </div>
+    <script type="module" src="./js/PracticeApp.js"></script>
 </body>
 </html>
