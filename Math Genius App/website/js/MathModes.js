@@ -1,24 +1,21 @@
 export class MathMode {
-    constructor(numOfDigits, difficulty){
-        this.numOfDigits = numOfDigits;
-        this.difficulty = difficulty || 'Easy';
+    constructor(range){
+        const min = Number(range?.min || 1);
+        const max = Number(range?.max || 10);
+        this.min = Math.min(min, max);
+        this.max = Math.max(min, max);
     }
 
-    questionSolver(op, num1, num2){
-        if (op == "+"){
-            return num1 + num2;
-        }  
-        else if (op == "-"){
-            return num1 - num2;
+    questionSolver(op, num1, num2) {
+        switch (op) {
+            case "+": return num1 + num2;
+            case "-": return num1 - num2;
+            case "x": return num1 * num2;
+            case "÷":
+                const result = num1 / num2;
+                return result % 1 === 0 ? result : Math.round(result * 100) / 100;
+            default: return null;
         }
-        else if (op == "x"){
-            return num1 * num2;
-        }
-        else if (op == "÷"){
-            const result = num1 / num2;
-            return result % 1 === 0 ? Math.floor(result) : parseFloat(result.toFixed(2));
-        }
-        return null;
     }
 
     questionGenerator(op){
@@ -29,7 +26,7 @@ export class MathMode {
     }
 
     randomNumberPicker(){
-        return Math.floor(Math.random() * (10**this.numOfDigits));
+        return Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
     }
 
     randomNonZeroPicker(){
@@ -40,32 +37,32 @@ export class MathMode {
         return value;
     }
 
-    generateEasyDivision(){
+    generateEasyDivision() {
         const num2 = this.randomNonZeroPicker();
-        const num1 = num2 * Math.floor(Math.random() * 9 + 1);
-        const ans = Math.floor(num1 / num2);
-        return {op: '÷', num1, num2, ans};
+        const maxQuotient = Math.floor(this.max / num2);
+        const ans = Math.floor(Math.random() * maxQuotient) + 1;
+        return { op: '÷', num1: num2 * ans, num2, ans };
     }
 }
 
 export class GameMode extends MathMode {
-    constructor(numOfDigits, difficulty){
-        super(numOfDigits, difficulty);
+    constructor(range){
+        super(range);
     }
 
     gameQuestion(){
         const operations = ["+", "-", "x", "÷"];
         const opChoice = operations[Math.floor(Math.random() * operations.length)];
         
-        if (this.difficulty === 'Easy' && opChoice === '÷') {
+        if (opChoice === '÷') {
             return super.generateEasyDivision();
         }
         return super.questionGenerator(opChoice);
     }
 }
 export class PracticeMode extends MathMode {
-    constructor(numOfDigits, difficulty){
-        super(numOfDigits, difficulty);
+    constructor(range){
+        super(range);
     }
     
     practiceQuestion(operations){
@@ -74,7 +71,7 @@ export class PracticeMode extends MathMode {
         }
         const opChoice = operations[Math.floor(Math.random() * operations.length)];
         
-        if (this.difficulty === 'Easy' && opChoice === '÷') {
+        if (opChoice === '÷') {
             return super.generateEasyDivision();
         }
         return super.questionGenerator(opChoice);

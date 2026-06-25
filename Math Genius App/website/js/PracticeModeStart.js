@@ -1,7 +1,13 @@
 const startPracticeBtn = document.getElementById('startPracticeBtn');
+const quesNumInput = document.getElementById('quesNumInput');
+const quesNumInc = document.getElementById('quesNumInc');
+const quesNumDec = document.getElementById('quesNumDec');
+
+quesNumInc.addEventListener('click', () => quesNumInput.stepUp());
+quesNumDec.addEventListener('click', () => quesNumInput.stepDown());
 
 startPracticeBtn.addEventListener('click', () => {
-    const questionCount = Number(document.getElementById('quesNumList').value) || 5;
+    const questionCount = Number(quesNumInput.value) || 5;
     const operations = [];
     if (document.getElementById('addition').checked) operations.push('+');
     if (document.getElementById('subtraction').checked) operations.push('-');
@@ -13,7 +19,12 @@ startPracticeBtn.addEventListener('click', () => {
         return;
     }
 
-    const difficulty = document.querySelector('input[name="Difficulty"]:checked')?.value || 'Easy';
-    localStorage.setItem('practiceSettings', JSON.stringify({ questionCount, operations, difficulty }));
+    let min = Number(document.getElementById('minValueInput').value) || 1;
+    let max = Number(document.getElementById('maxValueInput').value) || 10;
+    if (min < 1) min = 1;
+    if (max < 1) max = 10;
+    if (min > max) [min, max] = [max, min];
+
+    localStorage.setItem('practiceSettings', JSON.stringify({ questionCount, operations, range: { min, max } }));
     window.location.href = './practice.html';
 });

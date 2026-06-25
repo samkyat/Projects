@@ -89,21 +89,96 @@
     font-weight: 600;
 }
 
-#quesNumSelector select {
+#quesNumSelector .number-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+#rangeSelector {
+    gap: 1rem;
+    max-width: 38rem;
+}
+
+#rangeSelector p {
+    margin: 0;
+    font-size: 1.55rem;
+    font-weight: 600;
+}
+
+#rangeSelector .range-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+#rangeSelector label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1.4rem;
+    width: 100%;
+    max-width: 16rem;
+}
+
+#rangeSelector input {
     width: 100%;
     border: 1px solid #cbd5e1;
     border-radius: 1.4rem;
-    padding: 1.25rem 1.4rem;
+    padding: 1rem 1rem;
     background: #ffffff;
     color: #0f172a;
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 
-#quesNumSelector select:focus {
+#rangeSelector input:focus {
     outline: none;
     border-color: #2563eb;
     box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
+}
+
+#quesNumSelector .number-input-wrapper input {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 1.4rem;
+    padding: 1.25rem 1rem;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 1.7rem;
+    text-align: center;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+#quesNumSelector .number-input-wrapper input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
+}
+
+#quesNumSelector .number-btn {
+    border: 1px solid #cbd5e1;
+    border-radius: 1.4rem;
+    background: #f8fafc;
+    color: #0f172a;
+    width: 4.4rem;
+    height: 4.4rem;
+    font-size: 2rem;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-color 200ms ease, border-color 200ms ease, transform 150ms ease;
+}
+
+#quesNumSelector .number-btn:hover {
+    background: #eff6ff;
+    border-color: #93c5fd;
+}
+
+#quesNumSelector .number-btn:active {
+    transform: translateY(1px);
 }
 
 #opSelector,

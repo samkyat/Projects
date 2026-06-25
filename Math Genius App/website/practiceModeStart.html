@@ -16,14 +16,12 @@
             </div>
             <div id="main">
                 <div id="quesNumSelector">
-                    <label for="quesNum">Number of Questions</label>
-                    <select name="quesNum" id="quesNumList">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                        <option value="25">25</option>
-                    </select>
+                    <label for="quesNumInput">Number of Questions</label>
+                    <div class="number-input-wrapper">
+                        <button type="button" class="number-btn" id="quesNumDec" aria-label="Decrease number of questions">-</button>
+                        <input type="number" name="quesNum" id="quesNumInput" min="1" max="50" step="1" value="5">
+                        <button type="button" class="number-btn" id="quesNumInc" aria-label="Increase number of questions">+</button>
+                    </div>
                 </div>
                 <div id="opSelector">
                     <p>Operations</p>
@@ -44,20 +42,18 @@
                         Division
                     </label>
                 </div>
-                <div id="diffSelector">
-                    <p>Difficulty</p>
-                    <label>
-                        <input type="radio" name="Difficulty" id="Easy" value="Easy" checked>
-                        Easy
-                    </label>
-                    <label>
-                        <input type="radio" name="Difficulty" id="Medium" value="Medium">
-                        Medium
-                    </label>
-                    <label>
-                        <input type="radio" name="Difficulty" id="Hard" value="Hard">
-                        Hard
-                    </label>
+                <div id="rangeSelector">
+                    <p>Question range</p>
+                    <div class="range-inputs">
+                        <label>
+                            Min value
+                            <input type="number" id="minValueInput" min="1" max="99" value="1">
+                        </label>
+                        <label>
+                            Max value
+                            <input type="number" id="maxValueInput" min="1" max="99" value="10">
+                        </label>
+                    </div>
                 </div>
                 <button class="btn" id="startPracticeBtn" type="button">Start Practice</button>
             </div>

@@ -4,17 +4,19 @@ const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
 const scoreEl = document.getElementById('score');
 const streakEl = document.getElementById('streak');
+const progressEl = document.getElementById('progress');
 const statusEl = document.getElementById('status');
 const submitBtn = document.getElementById('submitBtn');
 
 const settings = JSON.parse(localStorage.getItem('gameSettings') || '{}');
-const difficulty = settings.difficulty || 'Easy';
-const digits = difficulty === 'Hard' ? 2 : difficulty === 'Medium' ? 1 : 1;
-
-const game = new GameMode(digits, difficulty);
+const { min = 1, max = 10 } = settings.range || {};
+const game = new GameMode({ min, max });
 let currentQuestion = null;
 let score = 0;
 let streak = 0;
+let bestStreak = 0;
+let currentQuestionIndex = 0;
+const wrongCounts = { '+': 0, '-': 0, 'x': 0, '÷': 0 };
 const endBtn = document.getElementById('endBtn');
 
 function formatQuestion(question) {
@@ -26,11 +28,17 @@ function updateStats() {
     streakEl.innerText = `Streak: ${streak}`;
 }
 
+function updateProgress() {
+    progressEl.innerText = `Question: ${currentQuestionIndex}`;
+}
+
 function loadQuestion() {
+    currentQuestionIndex += 1;
     currentQuestion = game.gameQuestion();
     questionEl.innerText = formatQuestion(currentQuestion);
     answerEl.value = '';
     statusEl.innerText = '';
+    updateProgress();
     answerEl.focus();
 }
 
@@ -48,6 +56,7 @@ function checkAnswer() {
     if (isCorrect) {
         score += 10;
         streak += 1;
+        bestStreak = Math.max(bestStreak, streak);
         submitBtn.innerText = '✓ Correct';
         submitBtn.style.backgroundColor = '#51cf66';
         submitBtn.style.borderColor = '#51cf66';
@@ -56,6 +65,7 @@ function checkAnswer() {
     } else {
         streak = 0;
         score = Math.max(0, score - 5);
+        wrongCounts[currentQuestion.op] = (wrongCounts[currentQuestion.op] || 0) + 1;
         submitBtn.innerText = `✗ Wrong`;
         submitBtn.style.backgroundColor = '#ff6b6b';
         submitBtn.style.borderColor = '#ff6b6b';
@@ -71,7 +81,7 @@ function checkAnswer() {
         submitBtn.style.borderColor = '';
         submitBtn.disabled = false;
         loadQuestion();
-    }, 2000);
+    }, 1500);
 }
 
 submitBtn.addEventListener('click', checkAnswer);
@@ -83,14 +93,18 @@ answerEl.addEventListener('keydown', event => {
 
 if (endBtn) {
     endBtn.addEventListener('click', () => {
+        const worstOperationEntry = Object.entries(wrongCounts).reduce(
+            (worst, [op, count]) => (count > worst.count ? { op, count } : worst),
+            { op: null, count: 0 }
+        );
+        const worstOperation = worstOperationEntry.count > 0 ? worstOperationEntry.op : null;
+
         // persist results for end page
-        const lastResult = { mode: 'game', score, streak, operation: currentQuestion?.op || null, difficulty };
+        const lastResult = { mode: 'game', score, streak, bestStreak, worstOperation, range: { min, max } };
         localStorage.setItem('lastResult', JSON.stringify(lastResult));
 
-        // update best streak
-        const bestKey = 'bestStreak_game';
-        const prevBest = Number(localStorage.getItem(bestKey) || 0);
-        if (streak > prevBest) localStorage.setItem(bestKey, String(streak));
+        // clear session settings after the game finishes
+        localStorage.removeItem('gameSettings');
 
         window.location.href = './end.html';
     });
