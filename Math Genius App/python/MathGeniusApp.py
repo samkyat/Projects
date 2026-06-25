@@ -31,9 +31,7 @@ def run_app():
             response = game_mode.game_question()
             if response == "end":
                 mode_choice = "end"
-                print(game_mode.summarize_score())
-        
-        
+                print(game_mode.summarize_score())    
     elif mode_choice.lower() == "practice":
         practice_mode = PracticeMode(2, " ")
         
@@ -73,7 +71,7 @@ def validate_practice_op(obj, op_choice, operations):
     elif op_choice == "Sub":
         obj.change_operation(operations["Sub"])
     elif op_choice == "Mult":
-        ob.change_operation(operations["Mult"])
+        obj.change_operation(operations["Mult"])
     elif op_choice == "Div":
         obj.change_operation(operations["Div"])
     else:

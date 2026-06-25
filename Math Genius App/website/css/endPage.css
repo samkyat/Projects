@@ -1,0 +1,33 @@
+#endPage {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: 100%;
+    max-width: 70rem;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 2.4rem;
+    box-shadow: 0 2.4rem 4rem rgba(15, 23, 42, 0.14);
+    padding: 3rem;
+}
+
+#endPage h2 {
+    margin: 0;
+    font-size: 2.8rem;
+    color: #1d4ed8;
+}
+
+#endPage p {
+    font-size: 1.55rem;
+    line-height: 1.75;
+    color: #334155;
+}
+
+#endPage .summary {
+    width: 100%;
+    max-width: 45rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background: #f8fafc;
+    border: 1px solid #c7d2fe;
+}

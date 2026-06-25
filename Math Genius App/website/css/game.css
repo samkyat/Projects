@@ -1,0 +1,111 @@
+#game {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    width: 100%;
+    max-width: 70rem;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    border-radius: 2.4rem;
+    box-shadow: 0 2.4rem 4rem rgba(15, 23, 42, 0.14);
+    padding: 3rem;
+}
+
+#game #header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#game #main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
+    width: 100%;
+}
+#game #header p {
+    margin: 0;
+    padding: 1rem 1.4rem;
+    border-radius: 1.5rem;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e40af;
+}
+
+#question {
+    margin: 0 auto;
+    width: min(100%, 45rem);
+    padding: 2rem 1.8rem;
+    border-radius: 2rem;
+    background: #f8fafc;
+    border: 1px solid #c7d2fe;
+    font-size: 2.7rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1e293b;
+}
+
+#answer {
+    width: 100%;
+    max-width: 38rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 1.4rem;
+    padding: 1.25rem 1.4rem;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 1.7rem;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+#answer:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12);
+}
+
+#submitBtn {
+    width: min(100%, 28rem);
+    padding: 1.25rem 1.4rem;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+#submitBtn:hover {
+    cursor: pointer;
+    background-color: #1d4ed8;
+    transform: translateY(-0.05rem);
+    box-shadow: 0 1rem 1.8rem rgba(37, 99, 235, 0.18);
+}
+
+#submitBtn:active {
+    transform: translateY(0);
+}
+
+#submitBtn:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+}
+
+@media (max-width: 720px) {
+    #game #header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #game #header p {
+        width: 100%;
+        text-align: center;
+    }
+}
