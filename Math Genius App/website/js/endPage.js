@@ -27,5 +27,5 @@ if (!lastResult || !lastResult.mode) {
         window.location.href = './practice.html';
     });
 
-    homeBtn.addEventListener('click', () => window.location.href = './home.html');
+    homeBtn.addEventListener('click', () => window.location.href = './index.html');
 }
