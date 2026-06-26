@@ -31,3 +31,7 @@
     background: #f8fafc;
     border: 1px solid #c7d2fe;
 }
+
+#endPage .actions button {
+    margin-bottom: 1rem;
+}
