@@ -18,6 +18,8 @@
     align-items: center;
     position: relative;
     padding: 0 2.4rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 #startPage #header h2 {
@@ -25,7 +27,7 @@
     font-size: 2.6rem;
     color: #1d4ed8;
     text-align: center;
-    width: 100%;
+    width: 75%;
 }
 
 #startPage #header .btn {
@@ -231,5 +233,15 @@
     #startPage #header {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    #startPage #header h2 {
+        width: 100%;
+    }
+
+    #startPage #header .btn {
+        position: relative;
+        left: auto;
+        align-self: flex-start;
     }
 }

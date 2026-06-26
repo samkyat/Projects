@@ -79,6 +79,7 @@ function checkAnswer() {
         streak += 1;
         bestStreak = Math.max(bestStreak, streak);
         submitBtn.innerText = '✓ Correct';
+        answerEl.style.backgroundColor = '#51cf66';
         submitBtn.style.backgroundColor = '#51cf66';
         submitBtn.style.borderColor = '#51cf66';
         statusEl.innerText = '';
@@ -87,6 +88,7 @@ function checkAnswer() {
         streak = 0;
         wrongCounts[currentQuestion.op] = (wrongCounts[currentQuestion.op] || 0) + 1;
         submitBtn.innerText = `✗ Wrong`;
+        answerEl.style.backgroundColor = '#ff6b6b';
         submitBtn.style.backgroundColor = '#ff6b6b';
         submitBtn.style.borderColor = '#ff6b6b';
         statusEl.innerText = `Correct answer: ${currentQuestion.ans}`;
@@ -105,6 +107,7 @@ function checkAnswer() {
 
     setTimeout(() => {
         submitBtn.innerText = 'Submit Answer';
+        answerEl.style.backgroundColor = '';
         submitBtn.style.backgroundColor = '';
         submitBtn.style.borderColor = '';
         submitBtn.disabled = false;
@@ -115,6 +118,12 @@ function checkAnswer() {
 submitBtn.addEventListener('click', checkAnswer);
 answerEl.addEventListener('keydown', event => {
     if (event.key === 'Enter') checkAnswer();
+});
+
+answerEl.addEventListener('input', function() {
+  // This instantly replaces anything that is NOT a number (0-9), 
+  // minus (-), plus (+), or decimal (.) with nothing.
+  this.value = this.value.replace(/[^0-9\-\+\.]/g, '');
 });
 
 loadQuestion();
