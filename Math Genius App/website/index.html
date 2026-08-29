@@ -6,6 +6,7 @@
     <title>Math Genius</title>
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/onboarding.css" />
 </head>
 <body>
     <div class="container">
@@ -25,8 +26,34 @@
                     <p>Choose operations and number of questions</p>
                     <a class="btn" href="./practiceModeStart.html">Customize practice</a>
                 </div>
+                <div id="moneyGameMode" class="flex-center flex-column">
+                    <h2>Money Game</h2>
+                    <p>Practice counting Canadian coins and bills with increasing levels</p>
+                    <a class="btn" href="./moneyGameModeStart.html">Count Canadian Money</a>
+                </div>
+                <div id="moneyPracticeMode" class="flex-center flex-column">
+                    <h2>Money Practice</h2>
+                    <p>Choose an amount and practice building it with Canadian money</p>
+                    <a class="btn" href="./moneyPracticeModeStart.html">Customize money practice</a>
+                </div>
             </div>
+            <button type="button" id="openOnboardingBtn" class="btn">How to play</button>
+            <a class="btn" href="./progress.html">View progress</a>
         </div>
     </div>
+    <dialog id="onboardingDialog" aria-labelledby="onboardingTitle">
+        <div class="onboarding-content">
+            <h2 id="onboardingTitle">Welcome to Math Genius</h2>
+            <p>Choose a mode to practice arithmetic or build Canadian money amounts.</p>
+            <ul class="onboarding-list">
+                <li>Game Mode gives you endless mixed-operation questions.</li>
+                <li>Practice Mode lets you choose operations and question count.</li>
+                <li>Money Mode asks you to match a target amount and piece count.</li>
+                <li>Money answers using extra pieces can earn a bonus point.</li>
+            </ul>
+            <button type="button" id="closeOnboardingBtn" class="btn">Got it</button>
+        </div>
+    </dialog>
+    <script type="module" src="./js/onboarding.js"></script>
 </body>
 </html>

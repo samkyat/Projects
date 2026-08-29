@@ -1,0 +1,78 @@
+#openOnboardingBtn {
+    align-self: center;
+    min-width: auto;
+    padding: 0.9rem 1.4rem;
+    background: #e0f2fe;
+    color: #075985;
+    border: 1px solid #7dd3fc;
+    font-size: 1.45rem;
+}
+
+#openOnboardingBtn:hover {
+    background: #bae6fd;
+    box-shadow: 0 0.8rem 1.4rem rgba(14, 116, 144, 0.16);
+}
+
+#onboardingDialog {
+    width: min(92vw, 52rem);
+    padding: 0;
+    border: 1px solid #bfdbfe;
+    border-radius: 2rem;
+    box-shadow: 0 2rem 6rem rgba(15, 23, 42, 0.28);
+    color: #0f172a;
+}
+
+#onboardingDialog::backdrop {
+    background: rgba(15, 23, 42, 0.48);
+    backdrop-filter: blur(3px);
+}
+
+.onboarding-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 2.8rem;
+}
+
+.onboarding-content h2 {
+    margin: 0;
+    color: #1e3a8a;
+}
+
+.onboarding-content p {
+    margin: 0;
+}
+
+.onboarding-list {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding-left: 2rem;
+}
+
+.onboarding-list li {
+    padding-left: 0.4rem;
+    color: #334155;
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+#closeOnboardingBtn {
+    align-self: flex-end;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #onboardingDialog::backdrop {
+        backdrop-filter: none;
+    }
+}
+
+@media (max-width: 520px) {
+    .onboarding-content {
+        padding: 2rem;
+    }
+
+    #closeOnboardingBtn {
+        align-self: stretch;
+    }
+}

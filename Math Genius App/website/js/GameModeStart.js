@@ -1,3 +1,5 @@
+import { writeJson } from './storage.js';
+
 const startGameBtn = document.getElementById('startGameBtn');
 
 startGameBtn.addEventListener('click', () => {
@@ -7,6 +9,6 @@ startGameBtn.addEventListener('click', () => {
     if (max < 1) max = 10;
     if (min > max) [min, max] = [max, min];
 
-    localStorage.setItem('gameSettings', JSON.stringify({ range: { min, max } }));
+    writeJson('gameSettings', { range: { min, max } });
     window.location.href = './game.html';
 });

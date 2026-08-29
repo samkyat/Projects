@@ -1,3 +1,5 @@
+import { writeJson } from './storage.js';
+
 const startPracticeBtn = document.getElementById('startPracticeBtn');
 const quesNumInput = document.getElementById('quesNumInput');
 const quesNumInc = document.getElementById('quesNumInc');
@@ -25,6 +27,6 @@ startPracticeBtn.addEventListener('click', () => {
     if (max < 1) max = 10;
     if (min > max) [min, max] = [max, min];
 
-    localStorage.setItem('practiceSettings', JSON.stringify({ questionCount, operations, range: { min, max } }));
+    writeJson('practiceSettings', { questionCount, operations, range: { min, max } });
     window.location.href = './practice.html';
 });

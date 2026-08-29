@@ -22,8 +22,16 @@
     flex-wrap: wrap;
 }
 
+#startPage #header h1,
 #startPage #header h2 {
     margin: 0;
+    font-size: 2.6rem;
+    color: #1d4ed8;
+    text-align: center;
+    width: 75%;
+}
+
+#startPage #header .page-title {
     font-size: 2.6rem;
     color: #1d4ed8;
     text-align: center;
@@ -101,9 +109,12 @@
 #rangeSelector {
     gap: 1rem;
     max-width: 38rem;
+    border: 0;
+    padding: 0;
 }
 
-#rangeSelector p {
+#rangeSelector p,
+#rangeSelector legend {
     margin: 0;
     font-size: 1.55rem;
     font-weight: 600;
@@ -191,7 +202,8 @@
 }
 
 #opSelector p,
-#diffSelector p {
+#diffSelector p,
+#opSelector legend {
     margin: 0;
     font-size: 1.55rem;
     font-weight: 600;

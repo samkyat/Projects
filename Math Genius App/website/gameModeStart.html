@@ -12,13 +12,13 @@
         <div id="startPage" class="flex-center flex-column">
             <div id="header">
                 <a href="./index.html" class="btn">&lt; Back</a>
-                <h2>Game Mode</h2>
+                <h1 class="page-title">Game Mode</h1>
             </div>
             <div id="main">
                 <p>Endless mixed-operation challenges:<br><span>+ - x &divide;</span></p>
                 <p>Answer as many questions as you can before ending the session.</p>
-                <div id="rangeSelector">
-                    <p>Question range</p>
+                <fieldset id="rangeSelector">
+                    <legend>Question range</legend>
                     <div class="range-inputs">
                         <label>
                             Min value
@@ -29,7 +29,7 @@
                             <input type="number" id="maxValueInput" min="1" max="99" value="10">
                         </label>
                     </div>
-                </div>
+                </fieldset>
                 <button class="btn" id="startGameBtn" type="button">Start Game</button>
             </div> 
         </div>

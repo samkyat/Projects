@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/progress.css" />
+</head>
+<body>
+    <div class="container">
+        <main id="progressPage" class="card">
+            <div class="progress-heading">
+                <a href="./index.html" class="btn">&lt; Home</a>
+                <h1>My Progress</h1>
+            </div>
+            <section aria-labelledby="totalsTitle">
+                <h2 id="totalsTitle">All-time totals</h2>
+                <div id="totals" class="progress-grid"></div>
+            </section>
+            <section aria-labelledby="achievementsTitle">
+                <h2 id="achievementsTitle">Achievements</h2>
+                <div id="achievements" class="achievement-list"></div>
+            </section>
+            <section aria-labelledby="sessionsTitle">
+                <h2 id="sessionsTitle">Recent sessions</h2>
+                <div id="sessions" class="session-list"></div>
+            </section>
+            <p id="progressStatus" role="status" aria-live="polite"></p>
+            <button type="button" id="resetProgressBtn" class="reset-button">Reset progress</button>
+        </main>
+    </div>
+    <script type="module" src="./js/progressPage.js"></script>
+</body>
+</html>
