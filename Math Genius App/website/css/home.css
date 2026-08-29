@@ -27,14 +27,18 @@
 }
 
 #gameMode,
-#practiceMode {
+#practiceMode,
+#moneyGameMode,
+#moneyPracticeMode {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
 }
 
 #gameMode,
-#practiceMode {
+#practiceMode,
+#moneyGameMode,
+#moneyPracticeMode {
     background: #f8fbff;
     border: 1px solid #dbeafe;
     border-radius: 2rem;
@@ -43,20 +47,26 @@
 }
 
 #gameMode:hover,
-#practiceMode:hover {
+#practiceMode:hover,
+#moneyGameMode:hover,
+#moneyPracticeMode:hover {
     transform: translateY(-0.2rem);
     box-shadow: 0 1.2rem 2.8rem rgba(59, 130, 246, 0.14);
     border-color: #93c5fd;
 }
 
 #gameMode h2,
-#practiceMode h2 {
+#practiceMode h2,
+#moneyGameMode h2,
+#moneyPracticeMode h2 {
     margin: 0;
     font-size: 2.6rem;
     color: #1d4ed8;
 }
 
 #gameMode p,
-#practiceMode p {
+#practiceMode p,
+#moneyGameMode p,
+#moneyPracticeMode p {
     margin: 0;
 }

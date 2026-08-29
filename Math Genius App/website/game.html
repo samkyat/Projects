@@ -6,6 +6,7 @@
     <title>Game</title>
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/game.css" />
+    <link rel="stylesheet" href="./css/money.css" />
 </head>
 <body>
     <div class="container">
@@ -18,6 +19,19 @@
             </div>
             <div id="main">
                 <p id="question"></p>
+                <section id="moneyInterface" class="money-interface" hidden>
+                    <div class="money-targets">
+                        <p id="moneyTarget">Target: $0.00</p>
+                        <p id="moneyCombinationTarget">Use: 0 pieces</p>
+                    </div>
+                    <div class="money-selection" id="moneySelection" aria-live="polite"></div>
+                    <div class="money-total-row">
+                        <span>Total: <strong id="moneyTotal">$0.00</strong></span>
+                        <span id="moneyCount">0 pieces</span>
+                    </div>
+                    <div id="moneyButtons" class="money-buttons"></div>
+                    <button type="button" id="clearMoneyBtn" class="money-clear">Clear selection</button>
+                </section>
                 <input type="text" pattern="[0-9\-\+\.]*" name="answer" id="answer">
                 <button type="submit" id="submitBtn">Submit Answer</button>
                 <p id="status"></p>

@@ -77,3 +77,54 @@ export class PracticeMode extends MathMode {
         return super.questionGenerator(opChoice);
     }
 }
+
+export const CANADIAN_DENOMINATIONS = [
+    { cents: 5, label: '5¢', type: 'coin' },
+    { cents: 10, label: '10¢', type: 'coin' },
+    { cents: 25, label: '25¢', type: 'coin' },
+    { cents: 100, label: '$1', type: 'coin' },
+    { cents: 200, label: '$2', type: 'coin' },
+    { cents: 500, label: '$5', type: 'bill' },
+    { cents: 1000, label: '$10', type: 'bill' },
+    { cents: 2000, label: '$20', type: 'bill' }
+];
+
+export const MONEY_OVERCOUNT_BONUS = 1;
+
+export class MoneyMode {
+    constructor(maxAmountCents = 2500) {
+        this.maxAmountCents = Math.max(5, Math.floor(Number(maxAmountCents) || 2500));
+    }
+
+    moneyQuestion() {
+        const usableDenominations = CANADIAN_DENOMINATIONS.filter(
+            denomination => denomination.cents <= this.maxAmountCents
+        );
+        const pieces = [];
+        const validCombination = [];
+        let totalCents = 0;
+        const maxPieces = Math.floor(this.maxAmountCents / usableDenominations[0].cents);
+        const pieceCount = Math.floor(Math.random() * Math.min(5, maxPieces)) + 1;
+
+        for (let index = 0; index < pieceCount; index += 1) {
+            const denomination = usableDenominations[
+                Math.floor(Math.random() * usableDenominations.length)
+            ];
+            pieces.push(denomination.cents);
+            validCombination.push(denomination.label);
+            totalCents += denomination.cents;
+        }
+
+        if (totalCents > this.maxAmountCents) {
+            return this.moneyQuestion();
+        }
+
+        return {
+            type: 'money',
+            targetCents: totalCents,
+            combinationCount: pieces.length,
+            validCombination,
+            denominations: CANADIAN_DENOMINATIONS
+        };
+    }
+}

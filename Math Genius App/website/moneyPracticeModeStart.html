@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Practice</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/startPage.css" />
+    <link rel="stylesheet" href="./css/money.css" />
+</head>
+<body>
+    <div class="container">
+        <div id="startPage" class="flex-center flex-column">
+            <div id="header">
+                <a href="./index.html" class="btn">&lt; Back</a>
+                <h2>Canadian Money Practice</h2>
+            </div>
+            <div id="main">
+                <div id="quesNumSelector">
+                    <label for="quesNumInput">Number of Questions</label>
+                    <div class="number-input-wrapper">
+                        <button type="button" class="number-btn" id="quesNumDec" aria-label="Decrease number of questions">-</button>
+                        <input type="number" id="quesNumInput" min="1" max="50" step="1" value="5">
+                        <button type="button" class="number-btn" id="quesNumInc" aria-label="Increase number of questions">+</button>
+                    </div>
+                </div>
+                <label class="money-limit" for="maxMoneyInput">
+                    Maximum amount to practice
+                    <span><input type="number" id="maxMoneyInput" min="0.05" max="100" step="0.05" value="25"> dollars</span>
+                </label>
+                <button class="btn" id="startMoneyPracticeBtn" type="button">Start Money Practice</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./js/MoneyPracticeModeStart.js"></script>
+</body>
+</html>

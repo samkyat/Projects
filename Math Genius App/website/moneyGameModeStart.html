@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Game</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/startPage.css" />
+    <link rel="stylesheet" href="./css/money.css" />
+</head>
+<body>
+    <div class="container">
+        <div id="startPage" class="flex-center flex-column">
+            <div id="header">
+                <a href="./index.html" class="btn">&lt; Back</a>
+                <h2>Canadian Money Game</h2>
+            </div>
+            <div id="main">
+                <p>Build the target amount using Canadian coins and bills.</p>
+                <div id="levelSelector" class="money-setup-options">
+                    <p>Choose a level</p>
+                    <label><input type="radio" name="level" value="beginner" checked> Beginner: $0-$25</label>
+                    <label><input type="radio" name="level" value="intermediate"> Intermediate: $0-$50</label>
+                    <label><input type="radio" name="level" value="pro"> Pro: $0-$100</label>
+                </div>
+                <button class="btn" id="startMoneyGameBtn" type="button">Start Money Game</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./js/MoneyGameModeStart.js"></script>
+</body>
+</html>

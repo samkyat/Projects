@@ -18,9 +18,21 @@ if (!lastResult || !lastResult.mode) {
     modeLine.innerText = `Mode: ${mode}`;
     scoreLine.innerText = `Score: ${score}`;
     bestLine.innerText = `Best streak this session: ${bestStreak}`;
-    opLine.innerText = worstOperation ? `Recommended operation to practice: ${worstOperation}` : 'Recommended operation to practice: any';
+    const isMoneyMode = mode === 'money' || mode === 'money-practice';
+    opLine.innerText = isMoneyMode
+        ? 'Keep practicing Canadian coins and bills.'
+        : (worstOperation ? `Recommended operation to practice: ${worstOperation}` : 'Recommended operation to practice: any');
 
     practiceOpBtn.addEventListener('click', () => {
+        if (isMoneyMode) {
+            localStorage.setItem('practiceSettings', JSON.stringify({
+                mode: 'money',
+                questionCount: 10,
+                maxAmountCents: lastResult.maxAmountCents || 2500
+            }));
+            window.location.href = './practice.html';
+            return;
+        }
         const op = worstOperation || '+';
         const practiceSettings = { questionCount: 10, operations: [op], range: range || { min: 1, max: 10 } };
         localStorage.setItem('practiceSettings', JSON.stringify(practiceSettings));
