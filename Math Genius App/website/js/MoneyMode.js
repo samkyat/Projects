@@ -7,6 +7,7 @@ export class MoneySelector {
         this.totalElement = totalElement;
         this.countElement = countElement;
         this.clearButton = clearButton;
+        this.denominations = CANADIAN_DENOMINATIONS;
         this.selected = [];
         this.onChange = null;
         this.renderButtons();
@@ -15,15 +16,32 @@ export class MoneySelector {
 
     renderButtons() {
         this.buttonContainer.innerHTML = '';
-        CANADIAN_DENOMINATIONS.forEach(denomination => {
+        this.denominations.forEach(denomination => {
             const button = document.createElement('button');
             button.type = 'button';
-            button.className = `money-button ${denomination.type}`;
-            button.innerText = denomination.label;
+            button.className = `money-button ${denomination.type} money-${denomination.cents}`;
+            const visual = document.createElement('span');
+            visual.className = 'money-visual';
+            visual.setAttribute('aria-hidden', 'true');
+            const label = document.createElement('span');
+            label.className = 'money-label';
+            label.innerText = denomination.label;
+            button.append(visual, label);
+            button.setAttribute('aria-label', `Add ${denomination.label}`);
             button.dataset.cents = denomination.cents;
             button.addEventListener('click', () => this.add(denomination));
             this.buttonContainer.appendChild(button);
         });
+    }
+
+    setDenominations(denominations) {
+        this.denominations = denominations;
+        this.renderButtons();
+    }
+
+    focusFirstButton() {
+        const firstButton = this.buttonContainer.querySelector('button:not(:disabled)');
+        if (firstButton) firstButton.focus();
     }
 
     add(denomination) {
@@ -39,6 +57,16 @@ export class MoneySelector {
     clear() {
         this.selected = [];
         this.update();
+    }
+
+    setDisabled(disabled) {
+        this.buttonContainer.querySelectorAll('button').forEach(button => {
+            button.disabled = disabled;
+        });
+        this.selectionContainer.querySelectorAll('button').forEach(button => {
+            button.disabled = disabled;
+        });
+        this.clearButton.disabled = disabled;
     }
 
     update() {

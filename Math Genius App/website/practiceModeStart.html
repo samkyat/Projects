@@ -12,7 +12,7 @@
         <div id="startPage" class="flex-center flex-column">
             <div id="header">
                 <a href="./index.html" class="btn">&lt; Back</a>
-                <h2>Practice Setup</h2>
+                <h1 class="page-title">Practice Setup</h1>
             </div>
             <div id="main">
                 <div id="quesNumSelector">
@@ -23,8 +23,8 @@
                         <button type="button" class="number-btn" id="quesNumInc" aria-label="Increase number of questions">+</button>
                     </div>
                 </div>
-                <div id="opSelector">
-                    <p>Operations</p>
+                <fieldset id="opSelector">
+                    <legend>Operations</legend>
                     <label>
                         <input type="checkbox" id="addition" name="operation" value="addition">
                         Addition
@@ -41,9 +41,9 @@
                         <input type="checkbox" id="division" name="operation" value="division">
                         Division
                     </label>
-                </div>
-                <div id="rangeSelector">
-                    <p>Question range</p>
+                </fieldset>
+                <fieldset id="rangeSelector">
+                    <legend>Question range</legend>
                     <div class="range-inputs">
                         <label>
                             Min value
@@ -54,7 +54,7 @@
                             <input type="number" id="maxValueInput" min="1" max="99" value="10">
                         </label>
                     </div>
-                </div>
+                </fieldset>
                 <button class="btn" id="startPracticeBtn" type="button">Start Practice</button>
             </div>
         </div>

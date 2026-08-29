@@ -12,29 +12,32 @@
     <div class="container">
         <div id="game" class="flex-center flex-column">
             <div id="header">
-                <p id="score">Score: 0</p>
-                <p id="streak">Streak: 0</p>
-                <p id="progress">Question: 0</p>
+                <h1 class="visually-hidden">Math Game</h1>
+                <p id="score" aria-live="polite">Score: 0</p>
+                <p id="streak" aria-live="polite">Streak: 0</p>
+                <p id="progress" aria-live="polite">Question: 0</p>
                 <button type="button" id="endBtn" class="btn">End Game</button>
             </div>
             <div id="main">
-                <p id="question"></p>
+                <p id="question" aria-live="polite"></p>
                 <section id="moneyInterface" class="money-interface" hidden>
+                    <h2 class="visually-hidden">Money selection</h2>
                     <div class="money-targets">
                         <p id="moneyTarget">Target: $0.00</p>
                         <p id="moneyCombinationTarget">Use: 0 pieces</p>
                     </div>
-                    <div class="money-selection" id="moneySelection" aria-live="polite"></div>
+                    <div class="money-selection" id="moneySelection" aria-live="polite" aria-label="Selected money"></div>
                     <div class="money-total-row">
-                        <span>Total: <strong id="moneyTotal">$0.00</strong></span>
-                        <span id="moneyCount">0 pieces</span>
+                        <span aria-live="polite">Total: <strong id="moneyTotal">$0.00</strong></span>
+                        <span id="moneyCount" aria-live="polite">0 pieces</span>
                     </div>
                     <div id="moneyButtons" class="money-buttons"></div>
                     <button type="button" id="clearMoneyBtn" class="money-clear">Clear selection</button>
                 </section>
-                <input type="text" pattern="[0-9\-\+\.]*" name="answer" id="answer">
+                <label class="visually-hidden" for="answer">Answer</label>
+                <input type="text" inputmode="decimal" pattern="[0-9\-\+\.]*" name="answer" id="answer">
                 <button type="submit" id="submitBtn">Submit Answer</button>
-                <p id="status"></p>
+                <p id="status" role="status" aria-live="polite"></p>
             </div>
         </div>
     </div>

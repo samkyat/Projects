@@ -1,3 +1,5 @@
+import { writeJson } from './storage.js';
+
 const startButton = document.getElementById('startMoneyGameBtn');
 
 const levelRanges = {
@@ -8,10 +10,10 @@ const levelRanges = {
 
 startButton.addEventListener('click', () => {
     const level = document.querySelector('input[name="level"]:checked').value;
-    localStorage.setItem('gameSettings', JSON.stringify({
+    writeJson('gameSettings', {
         mode: 'money',
         level,
         maxAmountCents: levelRanges[level]
-    }));
+    });
     window.location.href = './game.html';
 });

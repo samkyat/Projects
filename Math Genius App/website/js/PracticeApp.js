@@ -1,5 +1,8 @@
 import { PracticeMode, MoneyMode, MONEY_OVERCOUNT_BONUS } from './MathModes.js';
 import { MoneySelector, formatMoney } from './MoneyMode.js';
+import { evaluateMoneyAnswer } from './moneyScoring.js';
+import { readJson, removeItem, writeJson } from './storage.js';
+import { recordSession } from './progress.js';
 
 const questionEl = document.getElementById('question');
 const answerEl = document.getElementById('answer');
@@ -9,12 +12,17 @@ const submitBtn = document.getElementById('submitBtn');
 const statusEl = document.getElementById('status');
 const moneyInterface = document.getElementById('moneyInterface');
 
-const settings = JSON.parse(localStorage.getItem('practiceSettings') || '{}');
+const settings = readJson('practiceSettings');
 const questionCount = Number(settings.questionCount) || 5;
 const operations = Array.isArray(settings.operations) && settings.operations.length > 0 ? settings.operations : ['+', '-', 'x', '÷'];
 const { min = 1, max = 10 } = settings.range || {};
 const isMoneyMode = settings.mode === 'money';
-const moneyPractice = isMoneyMode ? new MoneyMode(settings.maxAmountCents) : null;
+const moneyPractice = isMoneyMode ? new MoneyMode(
+    settings.maxAmountCents,
+    settings.difficulty,
+    settings.moneyTypes
+) : null;
+const showMoneyHints = settings.showHints !== false;
 const moneySelector = isMoneyMode ? new MoneySelector({
     buttonContainer: document.getElementById('moneyButtons'),
     selectionContainer: document.getElementById('moneySelection'),
@@ -26,6 +34,10 @@ const moneySelector = isMoneyMode ? new MoneySelector({
 if (isMoneyMode) {
     moneyInterface.hidden = false;
     answerEl.hidden = true;
+    moneySelector.onChange = ({ pieceCount }) => {
+        submitBtn.disabled = pieceCount === 0;
+    };
+    moneySelector.reset();
 }
 
 const practice = new PracticeMode({ min, max });
@@ -34,6 +46,9 @@ let currentIndex = 0;
 let score = 0;
 let streak = 0;
 let bestStreak = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
+let bonusPoints = 0;
 const wrongCounts = operations.reduce((counts, op) => {
     counts[op] = 0;
     return counts;
@@ -56,7 +71,9 @@ function loadQuestion() {
     if (isMoneyMode) {
         document.getElementById('moneyTarget').innerText = `Target: ${formatMoney(currentQuestion.targetCents)}`;
         document.getElementById('moneyCombinationTarget').innerText = `Use: ${currentQuestion.combinationCount} pieces`;
+        moneySelector.setDenominations(currentQuestion.denominations);
         moneySelector.reset();
+        moneySelector.focusFirstButton();
     } else {
         answerEl.value = '';
     }
@@ -69,6 +86,7 @@ function finishPractice() {
     statusEl.innerText = `Practice complete! Final score: ${score}`;
     submitBtn.disabled = true;
     answerEl.disabled = true;
+    if (isMoneyMode) moneySelector.setDisabled(true);
 
     const worstOperationEntry = Object.entries(wrongCounts).reduce(
         (worst, [op, count]) => (count > worst.count ? { op, count } : worst),
@@ -82,14 +100,18 @@ function finishPractice() {
         score,
         streak,
         bestStreak,
+        correctAnswers,
+        incorrectAnswers,
+        bonusPoints,
         worstOperation,
         range: { min, max },
         maxAmountCents: settings.maxAmountCents
     };
-    localStorage.setItem('lastResult', JSON.stringify(lastResult));
+    recordSession(lastResult);
+    writeJson('lastResult', lastResult);
 
     // clear session settings after practice finishes
-    localStorage.removeItem('practiceSettings');
+    removeItem('practiceSettings');
 
     // redirect to end page
     setTimeout(() => window.location.href = './end.html', 800);
@@ -112,23 +134,25 @@ function checkAnswer() {
 
     if (isCorrect) {
         score += 10;
+        correctAnswers += 1;
         streak += 1;
         bestStreak = Math.max(bestStreak, streak);
         submitBtn.innerText = '✓ Correct';
         answerEl.style.backgroundColor = '#51cf66';
-        submitBtn.style.backgroundColor = '#51cf66';
-        submitBtn.style.borderColor = '#51cf66';
+        submitBtn.style.backgroundColor = '#15803d';
+        submitBtn.style.borderColor = '#15803d';
         statusEl.innerText = '';
         statusEl.style.color = '';
     } else {
         streak = 0;
+        incorrectAnswers += 1;
         wrongCounts[currentQuestion.op] = (wrongCounts[currentQuestion.op] || 0) + 1;
         submitBtn.innerText = `✗ Wrong`;
         answerEl.style.backgroundColor = '#ff6b6b';
-        submitBtn.style.backgroundColor = '#ff6b6b';
-        submitBtn.style.borderColor = '#ff6b6b';
+        submitBtn.style.backgroundColor = '#dc2626';
+        submitBtn.style.borderColor = '#dc2626';
         statusEl.innerText = `Correct answer: ${currentQuestion.ans}`;
-        statusEl.style.color = '#ff6b6b';
+        statusEl.style.color = '#b91c1c';
     }
 
     currentIndex += 1;
@@ -158,31 +182,35 @@ function checkMoneyAnswer() {
         return;
     }
 
-    const amountIsCorrect = totalCents === currentQuestion.targetCents;
-    const countIsEnough = pieceCount >= currentQuestion.combinationCount;
-    const isCorrect = amountIsCorrect && countIsEnough;
-    const earnedBonus = isCorrect && pieceCount > currentQuestion.combinationCount;
+    const result = evaluateMoneyAnswer(currentQuestion, { totalCents, pieceCount });
+    const { isCorrect, earnedBonus } = result;
 
     if (isCorrect) {
-        score += 10 + (earnedBonus ? MONEY_OVERCOUNT_BONUS : 0);
+        score += result.points;
+        correctAnswers += 1;
+        bonusPoints += earnedBonus ? MONEY_OVERCOUNT_BONUS : 0;
         streak += 1;
         bestStreak = Math.max(bestStreak, streak);
         submitBtn.innerText = earnedBonus ? `✓ Correct +${MONEY_OVERCOUNT_BONUS} bonus` : '✓ Correct';
-        submitBtn.style.backgroundColor = '#51cf66';
-        submitBtn.style.borderColor = '#51cf66';
-        statusEl.innerText = earnedBonus ? 'Bonus for finding an alternate combination!' : '';
+        submitBtn.style.backgroundColor = '#15803d';
+        submitBtn.style.borderColor = '#15803d';
+        statusEl.innerText = earnedBonus ? 'Correct! Bonus for finding an alternate combination!' : 'Correct!';
         statusEl.style.color = '#16803c';
     } else {
         streak = 0;
+        incorrectAnswers += 1;
         submitBtn.innerText = '✗ Wrong';
-        submitBtn.style.backgroundColor = '#ff6b6b';
-        submitBtn.style.borderColor = '#ff6b6b';
-        statusEl.innerText = `Valid combination: ${currentQuestion.validCombination.join(' + ')} = ${formatMoney(currentQuestion.targetCents)}`;
-        statusEl.style.color = '#ff6b6b';
+        submitBtn.style.backgroundColor = '#dc2626';
+        submitBtn.style.borderColor = '#dc2626';
+        statusEl.innerText = showMoneyHints
+            ? `Valid combination: ${currentQuestion.validCombination.join(' + ')} = ${formatMoney(currentQuestion.targetCents)}`
+            : 'Try another combination. The question stays active until you are correct.';
+        statusEl.style.color = '#b91c1c';
     }
 
     if (!isCorrect) {
         submitBtn.disabled = true;
+        moneySelector.setDisabled(true);
         setTimeout(() => {
             submitBtn.innerText = 'Submit Answer';
             submitBtn.style.backgroundColor = '';
@@ -190,12 +218,14 @@ function checkMoneyAnswer() {
             submitBtn.disabled = false;
             statusEl.innerText = '';
             moneySelector.reset();
+            moneySelector.setDisabled(false);
         }, 2000);
         return;
     }
 
     currentIndex += 1;
     submitBtn.disabled = true;
+    moneySelector.setDisabled(true);
     updateHeader();
 
     if (currentIndex >= questionCount) {
@@ -210,6 +240,7 @@ function checkMoneyAnswer() {
         submitBtn.disabled = false;
         statusEl.innerText = '';
         moneySelector.reset();
+        moneySelector.setDisabled(false);
         loadQuestion();
     }, 2000);
 }

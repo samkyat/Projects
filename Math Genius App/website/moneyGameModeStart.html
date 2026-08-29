@@ -10,19 +10,19 @@
 </head>
 <body>
     <div class="container">
-        <div id="startPage" class="flex-center flex-column">
+        <div id="startPage" class="money-start-page flex-center flex-column">
             <div id="header">
                 <a href="./index.html" class="btn">&lt; Back</a>
-                <h2>Canadian Money Game</h2>
+                <h1 class="page-title">Canadian Money Game</h1>
             </div>
             <div id="main">
                 <p>Build the target amount using Canadian coins and bills.</p>
-                <div id="levelSelector" class="money-setup-options">
-                    <p>Choose a level</p>
+                <fieldset id="levelSelector" class="money-setup-options">
+                    <legend>Choose a level</legend>
                     <label><input type="radio" name="level" value="beginner" checked> Beginner: $0-$25</label>
                     <label><input type="radio" name="level" value="intermediate"> Intermediate: $0-$50</label>
                     <label><input type="radio" name="level" value="pro"> Pro: $0-$100</label>
-                </div>
+                </fieldset>
                 <button class="btn" id="startMoneyGameBtn" type="button">Start Money Game</button>
             </div>
         </div>
