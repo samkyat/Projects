@@ -11,6 +11,12 @@
     padding: 3rem;
 }
 
+body.dark-theme #game {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow: 0 2.4rem 4rem rgba(2, 6, 23, 0.6);
+}
+
 #game #header {
     width: 100%;
     display: flex;
@@ -38,6 +44,12 @@
     color: #1e40af;
 }
 
+body.dark-theme #game #header p {
+    background: rgba(30, 41, 59, 0.9);
+    border-color: rgba(148, 163, 184, 0.2);
+    color: #bfdbfe;
+}
+
 #question {
     margin: 0 auto;
     width: min(100%, 45rem);
@@ -51,6 +63,12 @@
     color: #1e293b;
 }
 
+body.dark-theme #question {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(96, 165, 250, 0.25);
+    color: #e2e8f0;
+}
+
 #answer {
     width: 100%;
     max-width: 38rem;
@@ -61,6 +79,12 @@
     color: #0f172a;
     font-size: 1.7rem;
     transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+body.dark-theme #answer {
+    background: #0f172a;
+    border-color: #475569;
+    color: #e2e8f0;
 }
 
 #answer:focus {

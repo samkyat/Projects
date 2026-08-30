@@ -70,3 +70,33 @@
 #moneyPracticeMode p {
     margin: 0;
 }
+
+body.dark-theme #home {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2.4rem 4rem var(--shadow);
+}
+
+body.dark-theme #gameMode,
+body.dark-theme #practiceMode,
+body.dark-theme #moneyGameMode,
+body.dark-theme #moneyPracticeMode {
+    background: var(--surface-panel);
+    border-color: var(--border-strong);
+    box-shadow: 0 1.2rem 2.8rem var(--shadow);
+}
+
+body.dark-theme #gameMode h2,
+body.dark-theme #practiceMode h2,
+body.dark-theme #moneyGameMode h2,
+body.dark-theme #moneyPracticeMode h2 {
+    color: var(--heading-strong);
+}
+
+body.dark-theme #gameMode p,
+body.dark-theme #practiceMode p,
+body.dark-theme #moneyGameMode p,
+body.dark-theme #moneyPracticeMode p,
+body.dark-theme #home p {
+    color: var(--text-secondary);
+}

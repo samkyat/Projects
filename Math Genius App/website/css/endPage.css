@@ -11,6 +11,12 @@
     padding: 3rem;
 }
 
+body.dark-theme #endPage {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(148, 163, 184, 0.2);
+    box-shadow: 0 2.4rem 4rem rgba(2, 6, 23, 0.6);
+}
+
 #endPage h1,
 #endPage h2 {
     margin: 0;
@@ -18,10 +24,19 @@
     color: #1d4ed8;
 }
 
+body.dark-theme #endPage h1,
+body.dark-theme #endPage h2 {
+    color: #93c5fd;
+}
+
 #endPage p {
     font-size: 1.55rem;
     line-height: 1.75;
     color: #334155;
+}
+
+body.dark-theme #endPage p {
+    color: #cbd5e1;
 }
 
 #endPage .summary {
@@ -31,6 +46,11 @@
     border-radius: 2rem;
     background: #f8fafc;
     border: 1px solid #c7d2fe;
+}
+
+body.dark-theme #endPage .summary {
+    background: rgba(15, 23, 42, 0.82);
+    border-color: rgba(147, 197, 253, 0.25);
 }
 
 #endPage .summary p + p {
