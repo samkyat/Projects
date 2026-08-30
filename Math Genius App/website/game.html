@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
+    <script src="./js/theme-init.js"></script>
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/game.css" />
     <link rel="stylesheet" href="./css/money.css" />
@@ -35,12 +36,14 @@
                     <button type="button" id="clearMoneyBtn" class="money-clear">Clear selection</button>
                 </section>
                 <label class="visually-hidden" for="answer">Answer</label>
-                <input type="text" inputmode="decimal" pattern="[0-9\-\+\.]*" name="answer" id="answer">
+                <input type="text" pattern="[0-9\-\+\.]*" name="answer" id="answer">
                 <button type="submit" id="submitBtn">Submit Answer</button>
                 <p id="status" role="status" aria-live="polite"></p>
             </div>
         </div>
     </div>
+    <button type="button" id="themeToggle" class="theme-toggle" aria-label="Switch to dark mode">Dark mode</button>
     <script type="module" src="./js/GameApp.js"></script>
+    <script type="module" src="./js/theme.js"></script>
 </body>
 </html>

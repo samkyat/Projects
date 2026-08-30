@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    margin-bottom: 1.3rem;
 }
 
 .progress-heading .btn {
@@ -25,6 +26,7 @@
 }
 
 #progressPage h2 {
+    margin-bottom: 0.3rem;
     font-size: 2.2rem;
 }
 
@@ -32,6 +34,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    margin-bottom: 1.3rem;
 }
 
 .progress-stat,
@@ -59,6 +62,7 @@
 .session-list {
     display: grid;
     gap: 0.8rem;
+    margin-bottom: 1.3rem;
 }
 
 .achievement-item {
@@ -89,6 +93,43 @@
 
 .reset-button:hover {
     background: #ffe4e6;
+}
+
+body.dark-theme #progressPage {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2.4rem 4rem var(--shadow);
+}
+
+body.dark-theme .progress-stat,
+body.dark-theme .achievement-item,
+body.dark-theme .session-item {
+    background: var(--surface-panel);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+body.dark-theme .progress-stat strong {
+    color: var(--heading-strong);
+}
+
+body.dark-theme .progress-stat span,
+body.dark-theme .session-item span {
+    color: var(--text-secondary);
+}
+
+body.dark-theme .achievement-item {
+    color: var(--success-text);
+}
+
+body.dark-theme .reset-button {
+    background: var(--danger-bg);
+    border-color: var(--danger-text);
+    color: var(--danger-text);
+}
+
+body.dark-theme .reset-button:hover {
+    background: rgba(239, 68, 68, 0.15);
 }
 
 @media (max-width: 600px) {

@@ -61,6 +61,31 @@
     align-self: flex-end;
 }
 
+body.dark-theme #openOnboardingBtn {
+    background: var(--info-bg);
+    color: var(--info-text);
+    border-color: var(--border-strong);
+}
+
+body.dark-theme #onboardingDialog {
+    background: var(--surface);
+    border-color: var(--border-strong);
+    color: var(--text);
+    box-shadow: 0 2rem 6rem var(--shadow);
+}
+
+body.dark-theme #onboardingDialog::backdrop {
+    background: rgba(2, 6, 23, 0.7);
+}
+
+body.dark-theme .onboarding-content h2 {
+    color: var(--heading);
+}
+
+body.dark-theme .onboarding-list li {
+    color: var(--text-secondary);
+}
+
 @media (prefers-reduced-motion: reduce) {
     #onboardingDialog::backdrop {
         backdrop-filter: none;

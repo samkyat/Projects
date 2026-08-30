@@ -241,6 +241,54 @@
     min-width: auto;
 }
 
+body.dark-theme #startPage {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2.4rem 4rem var(--shadow);
+}
+
+body.dark-theme #startPage #header h1,
+body.dark-theme #startPage #header h2,
+body.dark-theme #startPage #header .page-title {
+    color: var(--heading-strong);
+}
+
+body.dark-theme #startPage p,
+body.dark-theme #opSelector legend,
+body.dark-theme #diffSelector legend,
+body.dark-theme #rangeSelector legend,
+body.dark-theme #rangeSelector p,
+body.dark-theme #quesNumSelector label,
+body.dark-theme #opSelector label,
+body.dark-theme #diffSelector label {
+    color: var(--text-secondary);
+}
+
+body.dark-theme #gameMode,
+body.dark-theme #practiceMode {
+    background: var(--surface-panel);
+    border-color: var(--border-strong);
+}
+
+body.dark-theme #rangeSelector input,
+body.dark-theme #quesNumSelector .number-input-wrapper input {
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+}
+
+body.dark-theme #quesNumSelector .number-btn {
+    background: var(--surface-panel-strong);
+    color: var(--input-text);
+    border-color: var(--input-border);
+}
+
+body.dark-theme #opSelector label,
+body.dark-theme #diffSelector label {
+    background: var(--surface-panel-strong);
+    border-color: var(--border-strong);
+}
+
 @media (max-width: 720px) {
     #startPage #header {
         flex-direction: column;

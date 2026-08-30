@@ -98,6 +98,35 @@
     cursor: not-allowed;
 }
 
+body.dark-theme #game {
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 2.4rem 4rem var(--shadow);
+}
+
+body.dark-theme #game #header p {
+    background: var(--info-bg);
+    border-color: var(--border-strong);
+    color: var(--info-text);
+}
+
+body.dark-theme #question {
+    background: var(--surface-panel-strong);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+body.dark-theme #answer {
+    background: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+}
+
+body.dark-theme #submitBtn {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
 @media (max-width: 720px) {
     #game #header {
         flex-direction: column;
