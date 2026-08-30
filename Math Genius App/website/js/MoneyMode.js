@@ -1,4 +1,5 @@
 import { CANADIAN_DENOMINATIONS } from './MathModes.js';
+import { formatCurrencyDisplay } from './currencyEngine.js';
 
 export class MoneySelector {
     constructor({ buttonContainer, selectionContainer, totalElement, countElement, clearButton }) {
@@ -10,8 +11,34 @@ export class MoneySelector {
         this.denominations = CANADIAN_DENOMINATIONS;
         this.selected = [];
         this.onChange = null;
+        this.bindEvents();
         this.renderButtons();
         this.clearButton.addEventListener('click', () => this.clear());
+    }
+
+    bindEvents() {
+        this.buttonContainer.addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-cents]');
+            if (!button) return;
+
+            const denomination = this.denominations.find(
+                item => String(item.cents) === String(button.dataset.cents)
+            );
+
+            if (denomination) {
+                this.add(denomination);
+            }
+        });
+
+        this.selectionContainer.addEventListener('click', (event) => {
+            const button = event.target.closest('button[data-index]');
+            if (!button) return;
+
+            const index = Number(button.dataset.index);
+            if (!Number.isNaN(index)) {
+                this.remove(index);
+            }
+        });
     }
 
     renderButtons() {
@@ -29,7 +56,6 @@ export class MoneySelector {
             button.append(visual, label);
             button.setAttribute('aria-label', `Add ${denomination.label}`);
             button.dataset.cents = denomination.cents;
-            button.addEventListener('click', () => this.add(denomination));
             this.buttonContainer.appendChild(button);
         });
     }
@@ -81,7 +107,7 @@ export class MoneySelector {
             removeButton.className = 'selected-money';
             removeButton.innerText = `${denomination.label} ×`;
             removeButton.setAttribute('aria-label', `Remove ${denomination.label}`);
-            removeButton.addEventListener('click', () => this.remove(index));
+            removeButton.dataset.index = String(index);
             this.selectionContainer.appendChild(removeButton);
         });
 
@@ -103,5 +129,5 @@ export class MoneySelector {
 }
 
 export function formatMoney(cents) {
-    return `$${(cents / 100).toFixed(2)}`;
+    return formatCurrencyDisplay(cents);
 }
