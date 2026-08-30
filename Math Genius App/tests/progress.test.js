@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { getPracticeProgress } from '../website/js/MathModes.js';
 import { getProgress, PROGRESS_KEY, recordSession, resetProgress } from '../website/js/progress.js';
 
 function createStorage() {
@@ -13,6 +14,13 @@ function createStorage() {
 
 test.beforeEach(() => {
     globalThis.localStorage = createStorage();
+});
+
+test('practice progress never exceeds the selected question limit', () => {
+    assert.deepEqual(getPracticeProgress(0, 5), { currentQuestionNumber: 1, isFinished: false });
+    assert.deepEqual(getPracticeProgress(4, 5), { currentQuestionNumber: 5, isFinished: false });
+    assert.deepEqual(getPracticeProgress(5, 5), { currentQuestionNumber: 5, isFinished: true });
+    assert.deepEqual(getPracticeProgress(9, 5), { currentQuestionNumber: 5, isFinished: true });
 });
 
 test('records sessions and updates totals', () => {

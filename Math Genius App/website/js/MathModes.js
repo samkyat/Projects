@@ -60,6 +60,17 @@ export class GameMode extends MathMode {
         return super.questionGenerator(opChoice);
     }
 }
+export function getPracticeProgress(currentIndex, questionCount) {
+    const safeQuestionCount = Math.max(1, Math.round(Number(questionCount) || 1));
+    const safeCurrentIndex = Math.max(0, Math.round(Number(currentIndex) || 0));
+    const clampedIndex = Math.min(safeCurrentIndex, safeQuestionCount);
+
+    return {
+        currentQuestionNumber: Math.min(clampedIndex + 1, safeQuestionCount),
+        isFinished: safeCurrentIndex >= safeQuestionCount
+    };
+}
+
 export class PracticeMode extends MathMode {
     constructor(range){
         super(range);

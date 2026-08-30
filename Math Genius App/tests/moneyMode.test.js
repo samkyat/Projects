@@ -6,6 +6,11 @@ import {
     MONEY_OVERCOUNT_BONUS
 } from '../website/js/MathModes.js';
 import { evaluateMoneyAnswer } from '../website/js/moneyScoring.js';
+import {
+    calculateTotalCents,
+    formatCurrencyDisplay,
+    verifyCurrencyTotal
+} from '../website/js/currencyEngine.js';
 
 const levelLimits = [2500, 5000, 10000];
 
@@ -86,4 +91,27 @@ test('rejects an incorrect total even when the piece count is enough', () => {
 
     assert.equal(result.isCorrect, false);
     assert.equal(result.earnedBonus, false);
+});
+
+test('calculates totals using integer cents with no floating-point drift', () => {
+    const totalCents = calculateTotalCents({
+        nickel: 1,
+        dime: 2,
+        quarter: 3,
+        loonie: 1,
+        toonie: 2,
+        fiveDollarBill: 1
+    });
+
+    assert.equal(totalCents, 5 + 20 + 75 + 100 + 400 + 500);
+});
+
+test('formats money values for the UI without floating point errors', () => {
+    assert.equal(formatCurrencyDisplay(375), '$3.75');
+    assert.equal(formatCurrencyDisplay(1200), '$12.00');
+});
+
+test('verifies a total using pure currency values', () => {
+    assert.equal(verifyCurrencyTotal({ nickel: 1, dime: 1, quarter: 1, loonie: 1 }, 140), true);
+    assert.equal(verifyCurrencyTotal({ nickel: 2, dime: 1, quarter: 1, loonie: 0 }, 95), false);
 });
